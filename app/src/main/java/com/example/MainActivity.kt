@@ -31,7 +31,9 @@ import com.example.ui.ServerViewModel
 import com.example.ui.theme.MyApplicationTheme
 
 import com.example.ui.AboutScreen
+import com.example.ui.SettingsScreen
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Settings
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,6 +80,18 @@ class MainActivity : ComponentActivity() {
                 NavigationBarItem(
                   selected = selectedTab == 2,
                   onClick = { selectedTab = 2 },
+                  icon = { Icon(Icons.Default.Settings, contentDescription = "Settings") },
+                  label = { Text("Settings") },
+                  colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = Color(0xFF1E2438),
+                    selectedTextColor = Color(0xFF1E2438),
+                    indicatorColor = Color(0xFFE8ECF8)
+                  ),
+                  modifier = Modifier.testTag("tab_settings")
+                )
+                NavigationBarItem(
+                  selected = selectedTab == 3,
+                  onClick = { selectedTab = 3 },
                   icon = { Icon(Icons.Default.Info, contentDescription = "About") },
                   label = { Text("About") },
                   colors = NavigationBarItemDefaults.colors(
@@ -99,6 +113,10 @@ class MainActivity : ComponentActivity() {
             } else if (selectedTab == 1) {
               ServerListScreen(
                 viewModel = viewModel,
+                modifier = Modifier.padding(paddingValues)
+              )
+            } else if (selectedTab == 2) {
+              SettingsScreen(
                 modifier = Modifier.padding(paddingValues)
               )
             } else {
